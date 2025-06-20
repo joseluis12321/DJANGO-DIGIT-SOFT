@@ -1,0 +1,17 @@
+# Ignorar entornos virtuales
+.venv/
+venv/
+
+# Ignorar base de datos SQLite
+db.sqlite3
+
+# Ignorar cachés de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignorar archivos de migraciones compilados
+*.pyc
+*.pyo
+*.pyd
