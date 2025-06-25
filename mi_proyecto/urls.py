@@ -17,16 +17,11 @@ Including another URLconf
 # mi_proyecto/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from mi_app import views
-
 
 urlpatterns = [
-   path('admin/', admin.site.urls),
-   #path('', views.index, name='index'),
-   path('login/', views.login_view, name='login'),
-
- #  path('prueba/', vista1),
-#   path('pagina/', vista3),  # Asegúrate de que la vista3 esté definida en views.py
+    path('admin/', admin.site.urls),
+    path('', include('mi_app.urls')),  # Incluye las rutas de tu app
 ]
+
 
 

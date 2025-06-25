@@ -1,24 +1,15 @@
 from django.shortcuts import render
-from django.contrib import messages
 
-def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('username')
-        password = request.POST.get('password')
-        role = request.POST.get('role')
+# Vista para Equipo.html
+def vista_equipo(request):
+    return render(request, 'mi_app/Equipo.html')
 
-        errores = []
+# Vista para ServicioTecno.html
+def vista_servicio_tecnico(request):
+    return render(request, 'mi_app/serviciotecnico.html')
 
-        if '@' not in email or '.' not in email:
-            errores.append("Por favor, ingrese un correo electrónico válido.")
 
-        if len(password) < 8:
-            errores.append("La contraseña debe tener al menos 8 caracteres.")
+# Vista para Tecnicos.html
+def vista_tecnicos(request):
+    return render(request, 'mi_app/Tecnicos.html')
 
-        if errores:
-            for error in errores:
-                messages.error(request, error)
-        else:
-            messages.success(request, f'Bienvenido {email} ({role.capitalize()})')
-
-    return render(request, 'mi_app/login.html')
