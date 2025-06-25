@@ -1,0 +1,53 @@
+{% extends 'mi_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Modal de Inicio de Sesión -->
+<div id="loginModal" class="modal" style="display: block;">
+    <div class="modal-content">
+        <div class="login-left">
+            <img src="{% static 'mi_app/imagenes/logo.jpg' %}" alt="Logo Digit Soft">
+        </div>
+        <div class="login-right">
+            <h2>Iniciar Sesión</h2>
+
+            <!-- MENSAJES DE DJANGO -->
+            {% if messages %}
+                <ul class="mensajes">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- FORMULARIO POST -->
+            <form id="login-form" method="post">
+                {% csrf_token %}
+                <label for="username">Correo Electrónico</label>
+                <input type="email" id="username" name="username" required placeholder="ejemplo@correo.com">
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required placeholder="Mínimo 8 caracteres">
+
+                <label>Tipo de Usuario</label>
+                <div class="role-selector">
+                    <label class="role-option {% if request.POST.role == 'client' %}selected{% endif %}" id="client-option">
+                        <input type="radio" name="role" value="client" {% if request.POST.role == 'client' or not request.POST.role %}checked{% endif %}>
+                        Cliente
+                    </label>
+                    <label class="role-option {% if request.POST.role == 'admin' %}selected{% endif %}" id="admin-option">
+                        <input type="radio" name="role" value="admin" {% if request.POST.role == 'admin' %}checked{% endif %}>
+                        Administrador
+                    </label>
+                    <label class="role-option {% if request.POST.role == 'technician' %}selected{% endif %}" id="tech-option">
+                        <input type="radio" name="role" value="technician" {% if request.POST.role == 'technician' %}checked{% endif %}>
+                        Técnico
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-login">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
